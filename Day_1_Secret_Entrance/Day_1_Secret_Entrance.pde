@@ -28,12 +28,13 @@ void adjust(int amount, int m) {
       val = max;
       m = -1;
     }
+    if ( val == 0) {
+      password++;
+    }
   }
 
   println(val);
-  if ( val == 0) {
-    password++;
-  }
+  
 }
 
 void process(String data) {
