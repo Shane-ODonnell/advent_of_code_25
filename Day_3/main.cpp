@@ -43,9 +43,7 @@ void process(){
     for (int i = 0; i < s; i++){
         max[i] = 0;
     }
-    //987654321111111
-    //811111111111119
-    //234234234234278
+
     for( int i = 0; i < input.length(); i++){
         int curr = getInt(input[i]);
         
@@ -62,8 +60,6 @@ void process(){
 
         }
         
-      
-        
     }
 
     printArray(max,s);
@@ -72,9 +68,9 @@ void process(){
 
     for(int i = 0; i < s; i++){
         val = val + max[s -1 - i]*ipow(10,i);
-        
         //cout << "on loop number " << i << " val is = " << val << endl;
     }
+    
     sum = sum + val;
     cout << "sum is: " << sum << endl;
 }
