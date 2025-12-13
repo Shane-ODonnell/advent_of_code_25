@@ -5,7 +5,7 @@ using namespace std;
 
 void process();
 int finish(string curr, string prev);
-void checkPrev(string& prev, int& viable);
+void checkPrev(string& prev, string curr, int& viable);
 
 bool isRoll(string array, int pos){
     if( array[pos] == '@')
@@ -27,7 +27,6 @@ int countRolls(string array, int pos){
     return count;
 }
 
-string prev, curr, next;
 const int limit = 4;
 
 int main(){
@@ -44,10 +43,8 @@ void process(){
     cin >> prev;
     cin >> curr;
 
-
-    checkPrev(prev, viable);
+    checkPrev(prev, curr, viable);
    
-    
     //cout << "viables found " << viable << endl;
 
     while(true){
@@ -81,7 +78,7 @@ void process(){
     }
 }
 
-void checkPrev(string& prev, int& viable){
+void checkPrev(string& prev, string curr, int& viable){
     for(int i = 0; i < prev.length(); i++){
             if(isRoll(prev,i)){
                 //cout << "spot " << i << " has a roll" << endl;
