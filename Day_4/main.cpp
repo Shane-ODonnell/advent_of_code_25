@@ -5,6 +5,7 @@ using namespace std;
 
 void process();
 int finish(string curr, string prev);
+void checkPrev(string& prev, int& viable);
 
 bool isRoll(string array, int pos){
     if( array[pos] == '@')
@@ -26,7 +27,6 @@ int countRolls(string array, int pos){
     return count;
 }
 
-
 string prev, curr, next;
 const int limit = 4;
 
@@ -44,23 +44,11 @@ void process(){
     cin >> prev;
     cin >> curr;
 
+
+    checkPrev(prev, viable);
+   
     
-    for(int i = 0; i < prev.length(); i++){
-        if(isRoll(prev,i)){
-            //cout << "spot " << i << " has a roll" << endl;
-            int count = 0;
-            count+= countRolls(prev,i);
-            count--;
-            count+= countRolls(curr,i);
-            if( count < limit)
-                viable++; //cout << "viable found" << endl;
-        }
-        /*else
-            cout << "not a roll" << endl;
-        */
-    }
-    
-        //cout << "viables found " << viable << endl;
+    //cout << "viables found " << viable << endl;
 
     while(true){
         
@@ -76,6 +64,10 @@ void process(){
                 count += countRolls(next,i);
                 if( count < limit){
                     viable++;
+                    curr[i] = 'x';
+                    i = 0;
+                    
+                    //checkPrev(prev, viable); // doesnt work right because it treats rolls as viable which arent because it doesnt have the context of the roll previous to previous
                     //cout << "viable found" << endl;
                 }
                 //cout << "____________" << endl;
@@ -87,4 +79,24 @@ void process(){
         prev = curr;
         curr = next;
     }
+}
+
+void checkPrev(string& prev, int& viable){
+    for(int i = 0; i < prev.length(); i++){
+            if(isRoll(prev,i)){
+                //cout << "spot " << i << " has a roll" << endl;
+                int count = 0;
+                count+= countRolls(prev,i);
+                count--;
+                count+= countRolls(curr,i);
+                if( count < limit){
+                    viable++; //cout << "viable found" << endl;
+                    prev[i] = 'x';
+                    i = 0;
+                }
+            }
+            /*else
+                cout << "not a roll" << endl;
+            */
+        }
 }
